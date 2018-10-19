@@ -3,7 +3,7 @@
 mobs:register_mob(":mobs_monster:mese_monster", {
 	type = "monster",
 	passive = false,
-	docile_by_day = true
+	docile_by_day = true,
 	damage = 3,
 	attack_type = "shoot",
 	shoot_interval = 0.5,

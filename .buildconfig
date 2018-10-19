@@ -1,0 +1,10 @@
+[default]
+name=Default
+runtime=host
+config-opts=
+run-opts=
+prefix=/home/derek/.cache/gnome-builder/install/mobs_mese/host
+app-id=
+postbuild=
+prebuild=
+default=true

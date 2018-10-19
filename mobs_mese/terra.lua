@@ -1,7 +1,7 @@
 mobs:register_mob("mobs_mese:terramese_monster", {
 	type = "monster",
 	passive = false,
-	docile_by_day = true
+	docile_by_day = true,
 	damage = 5,
 	attack_type = "shoot",
 	shoot_interval = 0.6,

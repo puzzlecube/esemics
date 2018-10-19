@@ -1,7 +1,7 @@
 mobs:register_mob("mobs_mese:hardmese_monster", {
 	type = "monster",
 	passive = false,
-	docile_by_day = true
+	docile_by_day = true,
 	damage = 12,
 	attack_type = "shoot",
 	shoot_interval = 0.21,
