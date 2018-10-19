@@ -1,0 +1,11 @@
+local mp = minetest.get_modpath("mobs_mese")
+
+dofile(mp.."/standard.lua")
+dofile(mp.."/terra.lua")
+dofile(mp.."/hard.lua")
+dofile(mp.."/dark.lua")
+dofile(mp.."/shadow.lua")
+dofile(mp.."/inferno.lua")
+dofile(mp.."/light.lua")
+dofile(mp.."/stratus.lua")
+dofile(mp.."/marine.lua")
