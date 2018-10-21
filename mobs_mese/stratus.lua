@@ -13,7 +13,7 @@ mobs:register_mob("mobs_mese:stratusmese_monster", {
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = texturelist("stratus"),
+	textures = mobs_compat.texturelist("stratus"),
 	blood_texture = "mese_stratusmese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {

@@ -13,7 +13,7 @@ mobs:register_mob("mobs_mese:terramese_monster", {
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = texturelist("terra"),
+	textures = mobs_compat.texturelist("terra"),
 	blood_texture = "mese_terramese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
@@ -77,8 +77,6 @@ mobs:register_mob("mobs_mese:terramese_monster", {
 		local item = clicker:get_wielded_item()
 		local itemname = item:get_name()
 		local name = clicker:get_player_name()
-		minetest.chat_send_player(name, self.gender)
-		minetest.chat_send_player(name, tostring(self.child))
 		--are we capturing?
 		mobs:capture_mob(self, clicker, 1, 5, 60, false, nil)
   end

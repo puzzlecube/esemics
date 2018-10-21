@@ -1,5 +1,3 @@
--- Mese Monster by Zeg9
-
 mobs:register_mob("mobs_mese:infernox_mese_monster", {
 	type = "monster",
 	passive = false,
@@ -15,7 +13,7 @@ mobs:register_mob("mobs_mese:infernox_mese_monster", {
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = texturelist("infernox"),
+	textures = mobs_compat.texturelist("infernox"),
 	blood_texture = "mese_infernox_mese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {

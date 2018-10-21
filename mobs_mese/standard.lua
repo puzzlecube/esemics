@@ -15,7 +15,7 @@ mobs:register_mob(":mobs_monster:mese_monster", {
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = texturelist(),
+	textures = mobs_compat.texturelist("monster"),
 	blood_texture = "default_mese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {

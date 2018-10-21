@@ -1,5 +1,3 @@
--- Mese Monster by Zeg9
-
 mobs:register_mob("mobs_mese:shadowmese_monster", {
 	type = "monster",
 	passive = false,
@@ -15,7 +13,7 @@ mobs:register_mob("mobs_mese:shadowmese_monster", {
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = texturelist("shadow"),
+	textures = mobs_compat.texturelist("shadow"),
 	blood_texture = "mese_shadowmese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {

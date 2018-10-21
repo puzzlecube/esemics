@@ -14,7 +14,7 @@ mobs:register_mob("mobs_mese:hardmese_monster", {
 	visual = "mesh",
 	visual_size = {x=4,y=4},
 	mesh = "zmobs_mese_monster.x",
-	textures = texturelist("hard"),
+	textures = mobs_compat.texturelist("hard"),
 	blood_texture = "mese_hardmese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {

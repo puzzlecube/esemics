@@ -1,5 +1,3 @@
--- Mese Monster by Zeg9
-
 mobs:register_mob("mobs_mese:mesemarine_monster", {
 	type = "monster",
 	passive = false,
@@ -15,7 +13,7 @@ mobs:register_mob("mobs_mese:mesemarine_monster", {
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = texturelist("marine"),
+	textures = mobs_compat.texturelist("marine"),
 	blood_texture = "mese_mesemarine_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
