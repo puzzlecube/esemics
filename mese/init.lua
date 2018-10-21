@@ -207,7 +207,7 @@ minetest.register_node("mese:stone_with_corrupt_mese", {
   },
 })
 
-minetest.register_craftitem("mes4:corrupt_mese_crystal_fragment", {
+minetest.register_craftitem("mese:corrupt_mese_crystal_fragment", {
   description = "Corrupt Mese Crystal Fragment",
   inventory_image = "mese_corrupt_mese_crystal_fragment.png",
 })
