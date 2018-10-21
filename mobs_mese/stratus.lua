@@ -9,18 +9,11 @@ mobs:register_mob("mobs_mese:stratusmese_monster", {
 	shoot_offset = 2,
 	hp_min = 30,
 	hp_max = 50,
-	armor = 140,
+	armor = 4,
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = {
-		male = {
-			{"mobs_mese_stratus.png"},
-		},
-		female = {
-			{"mobs_mese_stratus_female.png"},
-		},
-	},
+	textures = texturelist("stratus"),
 	blood_texture = "mese_stratusmese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
@@ -88,7 +81,7 @@ mobs:register_mob("mobs_mese:stratusmese_monster", {
 })
 
 
-mobs.spawn_specific({
+mobs:spawn({
 	name = "mobs_mese:stratusmese_monster",
 	nodes = {"default:stone"},
 	neighbors = {"air"},
@@ -102,7 +95,7 @@ mobs.spawn_specific({
 })
 
 
-mobs:register_egg("mobs_mese:stratusmese_monster", S("Earth Mese Monster"), "mese_stratusmese_block.png", 1)
+mobs:register_egg("mobs_mese:stratusmese_monster", "Stratus Mese Monster", "mese_stratusmese_block.png", 1)
 
 -- mese arrow (weapon)
 mobs:register_arrow("mobs_mese:stratusmese_arrow", {

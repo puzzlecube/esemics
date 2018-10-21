@@ -11,6 +11,15 @@ mese.meses = {
 	{"lightmese", "Lightmese"}
 }
 
+local ecolors = { -- esem colors to use
+  "red",
+  "green",
+  "blue",
+  "yellow",
+  "orange",
+  "purple",
+}
+
 function mese.register_mese(mese, def) -- similar to the normal minetest.register node syntax but DO NOT WRITE ANYTHING YOU WOULD PUT BEFORE THE :
     if not def.description then
         def.description = "{nil}"
@@ -135,6 +144,222 @@ minetest.override_item("mese:hardmese", {
 minetest.override_item("mese:lightmese", {
     light_source = 14
 })
+
+-- Special meses
+minetest.register_node("mese:corrupt_mese", {
+  description = "Corrupt Mese",
+  tiles = {
+    {
+      name = "mese_corrupt_mese_block_animated.png",
+      animation = {
+        type = "vertical_frames",
+        aspect_w = 16,
+        aspect_h = 16,
+        length = 3.0,
+      },
+    },
+  },
+	special_tiles = {
+		{
+			name = "mese_corrupt_mese_animated.png",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.0,
+			},
+			backface_culling = false,
+		},
+	},
+  groups = {mese=1, corrupt=1, cracky=3, level=3, radioactive=-10},
+  --[[on_place = function(pos)
+    for _,xoffset in pairs(nears) do
+      for __,yoffset in pairs(nears) do
+        for ___,zoffset in pairs(nears) do
+          if not pos.x then pos.x = pos.x end
+          if not pos.y then pos.y = pos.y end
+          if not pos.z then pos.z = pos.z end
+          local cpos = {pos.x + xoffset, pos.y + yoffset, pos.z + zoffset}
+          if not cpos.x then cpos.x = pos.x + xoffset end
+          if not cpos.y then cpos.y = pos.y + yoffset end
+          if not cpos.z then cpos.z = pos.z + zoffset end
+          local cnod = get_far_node(cpos)
+          local cnodn = cnod.name
+          if cnodn == "mese:corrupt_mese" then
+            minetest.set_node(cpos, {name="mese:esem_gemblock"})
+          end
+        end
+      end
+    end
+  end,]]
+})
+
+minetest.register_node("esem:stone_with_corrupt_mese", {
+  description = "Corrupt mese ore",
+  tiles = {"default_stone.png^esem_mineral_corrupt_mese.png"},
+  groups = {cracky=3, level=3},
+  drop = {
+    max_items = 4,
+    items = {{
+      rarity = 1,
+      items = {"esem:corrupt_mese_crystal"},
+    }}
+  },
+})
+
+minetest.register_craftitem("esem:corrupt_mese_crystal_fragment", {
+  description = "Corrupt Mese Crystal Fragment",
+  inventory_image = "esem_corrupt_mese_crystal_fragment.png",
+})
+
+minetest.register_craftitem("esem:corrupt_mese_crystal", {
+  description = "Corrupt Mese Crystal",
+  inventory_image = "esem_corrupt_mese_crystal.png",
+})
+
+minetest.register_craft({
+  output = 'esem:corrupt_mese_crystal',
+  recipe = {
+    {'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment'},
+    {'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment'},
+    {'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment'},
+  }
+})
+
+minetest.register_craft({
+  output = 'esem:corrupt_mese',
+  recipe = {
+    {'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal'},
+    {'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal'},
+    {'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal'},
+  }
+})
+
+minetest.register_craft({
+  output = 'esem:corrupt_mese_crystal_fragment 9',
+  recipe = {
+    {'esem:corrupt_mese_crystal'},
+  }
+})
+
+minetest.register_node("mese:depleted_mese", {    -- very average (wink wink) mese-like node that looks super old
+  description = "Depleted mese",
+  tiles = {"mese_depleted_mese_block.png"},
+  groups = {mese=1, depleted=1, cracky=2, level=2}
+})
+
+minetest.register_abm({
+	nodenames = { "mese:corrupt_mese" },
+	neighbors = { "default:mese"},
+	interval = 3,
+	chance = 2,
+	action = function (pos, node)
+    local stoppercnt = 0  -- how many nodes around it are capable of stopping the explosion
+    local finished = false                  -- are we done checking nearby nodes?
+    if pos.x ~= nil and pos.y ~= nil and pos.z ~= nil then
+      local epos = {pos} -- position table that currently contains the position of the corrupt mese, will be filled with cpos's where there is depleted mese
+      for _,xoffset in pairs(nears) do
+        for __,yoffset in pairs(nears) do
+          for ___,zoffset in pairs(nears) do
+            if not pos.x then pos.x = pos.x end
+            if not pos.y then pos.y = pos.y end
+            if not pos.z then pos.z = pos.z end
+            local cpos = {pos.x + xoffset, pos.y + yoffset, pos.z + zoffset}
+            if not cpos.x then cpos.x = pos.x + xoffset end
+            if not cpos.y then cpos.y = pos.y + yoffset end
+            if not cpos.z then cpos.z = pos.z + zoffset end
+            local cnod = get_far_node(cpos)
+            local cnodn = cnod.name
+            minetest.chat_send_all("="..cnodn)
+            if cnodn == "mese:depleted_mese" then
+              stoppercnt = stoppercnt + 1
+              table.insert(epos, cpos)
+              minetest.chat_send_all("perliminary stoppercnt="..stoppercnt)
+            elseif cnodn == "default:mese" then
+              table.insert(epos, cpos) -- oh yeah add this too otherwise you will just make it explode a little later once the depleted mese turns to esem
+            end
+            if xoffset == 1 and yoffset == 1 and zoffset == 1 then  --
+              finished = true
+              minetest.chat_send_all("finished")
+            end
+            if finished == true then      -- only do this when its done otherwise everything in this code is useless
+              if stoppercnt >= 2 then
+                for ____,cepos in pairs(epos) do
+                  --local cenodn = get_far_node(cepos).name
+                  --if cenodn == "mese:depleted_mese" or cnoden == "mese:corrupt_mese" or cnoden == "default:mese" then -- this is still here because what if the depleted mese gets removed between the time the position is checked and the checking finishes? then it is just free esem and that is not cool (or is it)
+                    minetest.set_node(cepos, {name="mese:esem"})
+                  --end
+                end
+              else
+                tnt.boom(pos, {radius=16,damage_radius=20}) -- BIG FAT FLIPPIN' BANG!
+                minetest.set_node(pos, {name="mese:esem"})
+              end
+            end
+          end
+        end
+      end
+    end
+end,
+})
+
+minetest.register_abm({
+	nodenames = { "mese:corrupt_mese" },
+	neighbors = { "mese:esem"},
+	interval = 3,
+	chance = 4,
+	action = function (pos, node)
+		minetest.set_node(pos, {name="mese:esem"})
+    for _,xoffset in pairs(nears) do
+      for __,yoffset in pairs(nears) do
+        for ___,zoffset in pairs(nears) do
+          if not pos.x then pos.x = pos.x end
+          if not pos.y then pos.y = pos.y end
+          if not pos.z then pos.z = pos.z end
+          local cpos = {pos.x + xoffset, pos.y + yoffset, pos.z + zoffset}
+          if not cpos.x then cpos.x = pos.x + xoffset end
+          if not cpos.y then cpos.y = pos.y + yoffset end
+          if not cpos.z then cpos.z = pos.z + zoffset end
+          local cnod = get_far_node(cpos)
+          local cnodn = cnod.name
+          if cnodn == "mese:esem" then
+            minetest.set_node(cpos, {name="mese:dark_esem"}) -- this one is supposed to race off after setting it
+          end
+        end
+      end
+    end
+	end,
+})
+
+minetest.register_abm({
+	nodenames = { "mese:corrupt_mese" },
+	neighbors = { "mese:dark_esem"},
+	interval = 3,
+	chance = 13,
+	action = function (pos, node)
+    local color = ecolors[math.random(1,#ecolors)]
+    local enam = "mese:"..color.."_esem"
+		minetest.set_node(pos, {name=enam})
+    for _,xoffset in pairs(nears) do
+      for __,yoffset in pairs(nears) do
+        for ___,zoffset in pairs(nears) do
+          if not pos.x then pos.x = pos.x end
+          if not pos.y then pos.y = pos.y end
+          if not pos.z then pos.z = pos.z end
+          local cpos = {pos.x + xoffset, pos.y + yoffset, pos.z + zoffset}
+          if not cpos.x then cpos.x = pos.x + xoffset end
+          if not cpos.y then cpos.y = pos.y + yoffset end
+          if not cpos.z then cpos.z = pos.z + zoffset end
+          local cnod = get_far_node(cpos)
+          local cnodn = cnod.name
+          if cnodn == "mese:dark_esem" then
+            minetest.set_node(cpos, {name=enam}) -- this one is supposed to race off after setting it
+          end
+        end
+      end
+    end
+	end,
+})
+
 
 
 minetest.register_ore({

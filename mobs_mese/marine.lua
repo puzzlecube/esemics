@@ -11,18 +11,11 @@ mobs:register_mob("mobs_mese:mesemarine_monster", {
 	shoot_offset = 2,
 	hp_min = 20,
 	hp_max = 50,
-	armor = 38,
+	armor = 18,
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = {
-		male = {
-			{"mobs_mese_marine.png"},
-		},
-		female = {
-			{"mobs_mese_marine_female.png"},
-		},
-	},
+	textures = texturelist("marine"),
 	blood_texture = "mese_mesemarine_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
@@ -100,7 +93,7 @@ mobs:spawn({
 })
 
 
-mobs:register_egg("mobs_mese:mesemarine_monster", S("dark Mese Monster"), "mese_mesemarine_block.png", 1)
+mobs:register_egg("mobs_mese:mesemarine_monster", "Mesemarine Monster", "mese_mesemarine_block.png", 1)
 
 -- mese arrow (weapon)
 mobs:register_arrow("mobs_mese:mesemarine_arrow", {

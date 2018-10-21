@@ -9,19 +9,12 @@ mobs:register_mob("mobs_mese:hardmese_monster", {
 	shoot_offset = 2,
 	hp_min = 400,
 	hp_max = 750,
-	armor = 2800,
-	collisionbox = {-4, -4, -4, 4, 4, 4},
+	armor = 2,
+	collisionbox = {-2, -2, -2, 2, 2, 2},
 	visual = "mesh",
-	visual_size = 8
+	visual_size = {x=4,y=4},
 	mesh = "zmobs_mese_monster.x",
-	textures = {
-		male = {
-			{"mobs_mese_hard.png"},
-		},
-		female = {
-			{"mobs_mese_hard_female.png"},
-		},
-	},
+	textures = texturelist("hard"),
 	blood_texture = "mese_hardmese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
@@ -99,7 +92,7 @@ mobs:spawn({
 })
 
 
-mobs:register_egg("mobs_mese:hardmese_monster", S("hard Mese Monster"), "mese_hardmese_block.png", 1)
+mobs:register_egg("mobs_mese:hardmese_monster", "Hard Mese Monster", "mese_hardmese_block.png", 1)
 
 -- mese arrow (weapon)
 mobs:register_arrow("mobs_mese:hardmese_arrow", {

@@ -9,18 +9,11 @@ mobs:register_mob("mobs_mese:dark_mese_monster", {
 	shoot_offset = 2,
 	hp_min = 20,
 	hp_max = 50,
-	armor = 58,
+	armor = 24,
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = {
-		male = {
-			{"mobs_mese_dark.png"},
-		},
-		female = {
-			{"mobs_mese_dark_female.png"},
-		},
-	},
+	textures = texturelist("dark"),
 	blood_texture = "mese_dark_mese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
@@ -98,7 +91,7 @@ mobs:spawn({
 })
 
 
-mobs:register_egg("mobs_mese:dark_mese_monster", S("dark Mese Monster"), "mese_dark_mese_block.png", 1)
+mobs:register_egg("mobs_mese:dark_mese_monster", "Dark Mese Monster", "mese_dark_mese_block.png", 1)
 
 -- mese arrow (weapon)
 mobs:register_arrow("mobs_mese:dark_mese_arrow", {

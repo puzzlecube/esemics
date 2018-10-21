@@ -9,30 +9,23 @@ mobs:register_mob("mobs_mese:lightmese_monster", {
 	shoot_offset = 2,
 	hp_min = 1000,
 	hp_max = 3000,
-	armor = 2000,
+	armor = 1,
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = {
-		male = {
-			{"mobs_mese_light.png"},
-		},
-		female = {
-			{"mobs_mese_light_female.png"},
-		},
-	},
+	textures = texturelist("light"),
 	blood_texture = "mese_lightmese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
 		random = "mobs_mesemonster",
 	},
 	view_range = 200,
-	walk_velocity = 5,
+	walk_velocity = 3,
 	run_velocity = 10,
 	jump = true,
 	jump_height = 8,
 	fall_damage = 0,
-	fall_speed = -6,
+	fall_speed = -8,
 	stepheight = 8,
 	fly = true,
 	fly_in = "air",
@@ -98,7 +91,7 @@ mobs:spawn({
 })
 
 
-mobs:register_egg("mobs_mese:lightmese_monster", S("dark Mese Monster"), "mese_lightmese_block.png", 1)
+mobs:register_egg("mobs_mese:lightmese_monster", "Dark Mese Monster", "mese_lightmese_block.png", 1)
 
 -- mese arrow (weapon)
 mobs:register_arrow("mobs_mese:lightmese_arrow", {

@@ -11,18 +11,11 @@ mobs:register_mob("mobs_mese:infernox_mese_monster", {
 	shoot_offset = 2,
 	hp_min = 100,
 	hp_max = 200,
-	armor = 360,
+	armor = 6,
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = {
-		male = {
-			{"mobs_mese_infernox.png"},
-		},
-		female = {
-			{"mobs_mese_infernox_female.png"},
-		},
-	},
+	textures = texturelist("infernox"),
 	blood_texture = "mese_infernox_mese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
@@ -100,7 +93,7 @@ mobs:spawn({
 })
 
 
-mobs:register_egg("mobs_mese:infernox_mese_monster", S("infernox Mese Monster"), "mese_infernox_mese_block.png", 1)
+mobs:register_egg("mobs_mese:infernox_mese_monster", "infernox Mese Monster", "mese_infernox_mese_block.png", 1)
 
 -- mese arrow (weapon)
 mobs:register_arrow("mobs_mese:infernox_mese_arrow", {

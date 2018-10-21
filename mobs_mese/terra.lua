@@ -9,18 +9,11 @@ mobs:register_mob("mobs_mese:terramese_monster", {
 	shoot_offset = 2,
 	hp_min = 40,
 	hp_max = 75,
-	armor = 280,
+	armor = 3,
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "zmobs_mese_monster.x",
-	textures = {
-		male = {
-			{"mobs_mese_terra.png"},
-		},
-		female = {
-			{"mobs_mese_terra_female.png"},
-		},
-	},
+	textures = texturelist("terra"),
 	blood_texture = "mese_terramese_crystal_fragment.png",
 	makes_footstep_sound = false,
 	sounds = {
@@ -30,6 +23,8 @@ mobs:register_mob("mobs_mese:terramese_monster", {
 	walk_velocity = 0.3,
 	run_velocity = 1.4,
 	jump = true,
+	birth_wait = 1,
+	max_hornytime = 60,
 	jump_height = 8,
 	fall_damage = 0,
 	fall_speed = -6,
@@ -82,6 +77,8 @@ mobs:register_mob("mobs_mese:terramese_monster", {
 		local item = clicker:get_wielded_item()
 		local itemname = item:get_name()
 		local name = clicker:get_player_name()
+		minetest.chat_send_player(name, self.gender)
+		minetest.chat_send_player(name, tostring(self.child))
 		--are we capturing?
 		mobs:capture_mob(self, clicker, 1, 5, 60, false, nil)
   end
@@ -98,7 +95,7 @@ mobs:spawn({
 })
 
 
-mobs:register_egg("mobs_mese:terramese_monster", S("Earth Mese Monster"), "mese_terramese_block.png", 1)
+mobs:register_egg("mobs_mese:terramese_monster", "Terramese Monster", "mese_terramese_block.png", 1)
 
 
 mobs:alias_mob("mobs:mese_monster", "mobs_monster:mese_monster") -- compatiblity
