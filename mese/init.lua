@@ -194,51 +194,54 @@ minetest.register_node("mese:corrupt_mese", {
   end,]]
 })
 
-minetest.register_node("esem:stone_with_corrupt_mese", {
+minetest.register_node("mese:stone_with_corrupt_mese", {
   description = "Corrupt mese ore",
-  tiles = {"default_stone.png^esem_mineral_corrupt_mese.png"},
+  tiles = {"default_stone.png^mese_mineral_corrupt_mese.png"},
   groups = {cracky=3, level=3},
   drop = {
     max_items = 4,
     items = {{
       rarity = 1,
-      items = {"esem:corrupt_mese_crystal"},
+      items = {"mese:corrupt_mese_crystal"},
     }}
   },
 })
 
-minetest.register_craftitem("esem:corrupt_mese_crystal_fragment", {
+minetest.register_craftitem("mes4:corrupt_mese_crystal_fragment", {
   description = "Corrupt Mese Crystal Fragment",
-  inventory_image = "esem_corrupt_mese_crystal_fragment.png",
+  inventory_image = "mese_corrupt_mese_crystal_fragment.png",
 })
 
-minetest.register_craftitem("esem:corrupt_mese_crystal", {
+minetest.register_craftitem("mese:corrupt_mese_crystal", {
   description = "Corrupt Mese Crystal",
-  inventory_image = "esem_corrupt_mese_crystal.png",
+  inventory_image = "mese_corrupt_mese_crystal.png",
 })
 
 minetest.register_craft({
-  output = 'esem:corrupt_mese_crystal',
+  output = 'mese:corrupt_mese_crystal',
   recipe = {
-    {'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment'},
-    {'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment'},
-    {'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment', 'esem:corrupt_mese_crystal_fragment'},
+    {'mese:corrupt_mese_crystal_fragment', 'mese:corrupt_mese_crystal_fragment', 
+'mese:corrupt_mese_crystal_fragment'},
+    {'mese:corrupt_mese_crystal_fragment', 'mese:corrupt_mese_crystal_fragment', 
+'mese:corrupt_mese_crystal_fragment'},
+    {'mese:corrupt_mese_crystal_fragment', 'mese:corrupt_mese_crystal_fragment', 
+'mese:corrupt_mese_crystal_fragment'},
   }
 })
 
 minetest.register_craft({
-  output = 'esem:corrupt_mese',
+  output = 'mese:corrupt_mese',
   recipe = {
-    {'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal'},
-    {'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal'},
-    {'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal', 'esem:corrupt_mese_crystal'},
+    {'mese:corrupt_mese_crystal', 'mese:corrupt_mese_crystal', 'mese:corrupt_mese_crystal'},
+    {'mese:corrupt_mese_crystal', 'mese:corrupt_mese_crystal', 'mese:corrupt_mese_crystal'},
+    {'mese:corrupt_mese_crystal', 'mese:corrupt_mese_crystal', 'mese:corrupt_mese_crystal'},
   }
 })
 
 minetest.register_craft({
-  output = 'esem:corrupt_mese_crystal_fragment 9',
+  output = 'mese:corrupt_mese_crystal_fragment 9',
   recipe = {
-    {'esem:corrupt_mese_crystal'},
+    {'mese:corrupt_mese_crystal'},
   }
 })
 
