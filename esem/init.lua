@@ -386,8 +386,8 @@ minetest.override_item("esem:light_esem_gem_fragment", {
 	groups = {esem=1, lightesem=1}
 })
 
-minetest.register_tool("esem:legeond_pick", {
-    description = "Legeondary Esem pickaxe",
+minetest.register_tool("esem:legend_pick", {
+    description = "Legendary Esem pickaxe",
     inventory_image = "esem_pick.png",
 	tool_capabilities = {
 		max_drop_level=300,
