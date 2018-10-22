@@ -12,8 +12,6 @@ local esems = {
 
 dofile(minetest.get_modpath("esem").."/prism.lua")
 
-local nears = { -1, 0, 1 } -- for easier writing of the esem checking abm
-
 local function get_far_node(pos)
 	local node = minetest.get_node(pos)
 	if node.name == "ignore" then

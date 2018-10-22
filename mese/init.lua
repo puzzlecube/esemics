@@ -20,6 +20,8 @@ local ecolors = { -- esem colors to use
   "purple",
 }
 
+local nears = { -1, 0, 1 } -- for easier writing of the esem checking abm
+
 function mese.register_mese(mese, def) -- similar to the normal minetest.register node syntax but DO NOT WRITE ANYTHING YOU WOULD PUT BEFORE THE :
     if not def.description then
         def.description = "{nil}"
