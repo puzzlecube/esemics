@@ -495,17 +495,6 @@ minetest.register_ore({
 
 minetest.register_ore({
   ore_type       = "scatter",
-  ore            = "esem:stone_with_corrupt_mese",
-  wherein        = "default:stone",
-  clust_scarcity = 8 * 8 * 8,
-  clust_num_ores = 16,
-  clust_size     = 8,
-  y_min          = -31000,
-  y_max          = -512,
-})
-
-minetest.register_ore({
-  ore_type       = "scatter",
   ore            = "esem:dark_esem",
   wherein        = "default:stone",
   clust_scarcity = 32 * 32 * 32,
@@ -594,6 +583,119 @@ minetest.register_abm({
 		end
 	end,
 })
+
+minetest.register_abm({
+	nodenames = { "mese:corrupt_mese" },
+	neighbors = { "esem:dark_esem"},
+	interval = 3,
+	chance = 13,
+	action = function (pos, node)
+    local color = ecolors[math.random(1,#ecolors)]
+    local enam = "esem:"..color.."_esem"
+		minetest.set_node(pos, {name=enam})
+    for _,xoffset in pairs(nears) do
+      for __,yoffset in pairs(nears) do
+        for ___,zoffset in pairs(nears) do
+          if not pos.x then pos.x = pos.x end
+          if not pos.y then pos.y = pos.y end
+          if not pos.z then pos.z = pos.z end
+          local cpos = {pos.x + xoffset, pos.y + yoffset, pos.z + zoffset}
+          if not cpos.x then cpos.x = pos.x + xoffset end
+          if not cpos.y then cpos.y = pos.y + yoffset end
+          if not cpos.z then cpos.z = pos.z + zoffset end
+          local cnod = get_far_node(cpos)
+          local cnodn = cnod.name
+          if cnodn == "esem:dark_esem" then
+            minetest.set_node(cpos, {name=enam}) -- this one is supposed to race off after setting it
+          end
+        end
+      end
+    end
+	end,
+})
+
+minetest.register_abm({
+	nodenames = { "mese:corrupt_mese" },
+	neighbors = { "default:mese"},
+	interval = 3,
+	chance = 2,
+	action = function (pos, node)
+    local stoppercnt = 0  -- how many nodes around it are capable of stopping the explosion
+    local finished = false                  -- are we done checking nearby nodes?
+    if pos.x ~= nil and pos.y ~= nil and pos.z ~= nil then
+      local epos = {pos} -- position table that currently contains the position of the corrupt mese, will be filled with cpos's where there is depleted mese
+      for _,xoffset in pairs(nears) do
+        for __,yoffset in pairs(nears) do
+          for ___,zoffset in pairs(nears) do
+            if not pos.x then pos.x = pos.x end
+            if not pos.y then pos.y = pos.y end
+            if not pos.z then pos.z = pos.z end
+            local cpos = {pos.x + xoffset, pos.y + yoffset, pos.z + zoffset}
+            if not cpos.x then cpos.x = pos.x + xoffset end
+            if not cpos.y then cpos.y = pos.y + yoffset end
+            if not cpos.z then cpos.z = pos.z + zoffset end
+            local cnod = get_far_node(cpos)
+            local cnodn = cnod.name
+            minetest.chat_send_all("="..cnodn)
+            if cnodn == "mese:depleted_mese" then
+              stoppercnt = stoppercnt + 1
+              table.insert(epos, cpos)
+              minetest.chat_send_all("perliminary stoppercnt="..stoppercnt)
+            elseif cnodn == "default:mese" then
+              table.insert(epos, cpos) -- oh yeah add this too otherwise you will just make it explode a little later once the depleted mese turns to esem
+            end
+            if xoffset == 1 and yoffset == 1 and zoffset == 1 then  --
+              finished = true
+              minetest.chat_send_all("finished")
+            end
+            if finished == true then      -- only do this when its done otherwise everything in this code is useless
+              if stoppercnt >= 2 then
+                for ____,cepos in pairs(epos) do
+                  --local cenodn = get_far_node(cepos).name
+                  --if cenodn == "mese:depleted_mese" or cnoden == "mese:corrupt_mese" or cnoden == "default:mese" then -- this is still here because what if the depleted mese gets removed between the time the position is checked and the checking finishes? then it is just free esem and that is not cool (or is it)
+                    minetest.set_node(cepos, {name="esem:esem"})
+                  --end
+                end
+              else
+                tnt.boom(pos, {radius=16,damage_radius=20}) -- BIG FAT FLIPPIN' BANG!
+                minetest.set_node(pos, {name="esem:esem"})
+              end
+            end
+          end
+        end
+      end
+    end
+end,
+})
+
+minetest.register_abm({
+	nodenames = { "mese:corrupt_mese" },
+	neighbors = { "mese:esem"},
+	interval = 3,
+	chance = 4,
+	action = function (pos, node)
+		minetest.set_node(pos, {name="esem:esem"})
+    for _,xoffset in pairs(nears) do
+      for __,yoffset in pairs(nears) do
+        for ___,zoffset in pairs(nears) do
+          if not pos.x then pos.x = pos.x end
+          if not pos.y then pos.y = pos.y end
+          if not pos.z then pos.z = pos.z end
+          local cpos = {pos.x + xoffset, pos.y + yoffset, pos.z + zoffset}
+          if not cpos.x then cpos.x = pos.x + xoffset end
+          if not cpos.y then cpos.y = pos.y + yoffset end
+          if not cpos.z then cpos.z = pos.z + zoffset end
+          local cnod = get_far_node(cpos)
+          local cnodn = cnod.name
+          if cnodn == "esem:esem" then
+            minetest.set_node(cpos, {name="esem:dark_esem"}) -- this one is supposed to race off after setting it
+          end
+        end
+      end
+    end
+	end,
+})
+
 
 local rods = { --esemic rods
 	"core",
